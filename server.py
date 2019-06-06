@@ -1,4 +1,5 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, request, abort
+from app.database import addContact
 app = Flask(__name__)
 
 @app.route("/")
@@ -13,7 +14,15 @@ def getContacts():
 # Adds a new contact
 @app.route("/contacts", methods=["POST"])
 def postContact():
-    return "contact posted"
+    try:
+        addContact(request.json)
+    except ValueError:
+        abort(400)
+    except Exception as e:
+        app.logger.warn("Unknown Exception")
+        abort(500)
+
+    return "OK"
 
 # Returns full information on a given contact
 @app.route("/contact/<id>", methods=["GET"])
