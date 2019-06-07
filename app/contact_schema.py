@@ -1,7 +1,9 @@
-schema = {
-     "type" : "object",
-     "properties" : {
-         "price" : {"type" : "number"},
-         "name" : {"type" : "string"},
-     },
+contact_schema = {
+    "type" : "object",
+    "properties" : {
+        "name" : {"type" : "string"},
+        "phone" : {"type" : "string"},
+        "email" : {"type" : "string"},
+        "birthday" : {"type" : "string"}
+    }
 }
